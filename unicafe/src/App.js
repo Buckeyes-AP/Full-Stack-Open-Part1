@@ -1,5 +1,13 @@
 import { useState } from 'react';
 
+const Statistics = (props) => {
+  return (
+    <div>
+      <p>{props.text} {props.value}</p>
+    </div>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -15,7 +23,7 @@ const App = () => {
     setTotal(updatedTotal);
     const updatedAverage = (updatedGood - bad) / updatedTotal;
     setAverage(updatedAverage);
-    const updatePositive = (updatedGood / updatedTotal) * 100;
+    const updatePositive = (updatedGood / updatedTotal) * 100 + " %";
     setPositive(updatePositive);
   }
   const increaseNeutral = () => {
@@ -23,7 +31,7 @@ const App = () => {
     setNeutral(updatedNeutral);
     const updatedTotal = good + bad + updatedNeutral;
     setTotal(updatedTotal);
-    const updatePositive = (good / updatedTotal) * 100;
+    const updatePositive = (good / updatedTotal) * 100 + " %";
     setPositive(updatePositive);
     // setAverage((good - bad) / total);
   }
@@ -34,7 +42,7 @@ const App = () => {
     setTotal(updatedTotal);
     const updatedAverage = (good - updatedBad) / updatedTotal;
     setAverage(updatedAverage);
-    const updatePositive = (good / updatedTotal) * 100;
+    const updatePositive = (good / updatedTotal) * 100 + " %";
     setPositive(updatePositive);
     // setAverage((good - updatedBad) / total)
   }
@@ -46,12 +54,12 @@ const App = () => {
       <button onClick={increaseNeutral}>neutral</button>
       <button onClick={increaseBad}>bad</button>
       <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>total {total}</p>
-      <p>average {average}</p>
-      <p>positive {positive}</p>
+      <Statistics text="good" value={good}/>
+      <Statistics text="neutral" value={neutral}/>
+      <Statistics text="bad" value={bad}/>
+      <Statistics text="total" value={total}/>
+      <Statistics text="average" value={average}/>
+      <Statistics text="positive" value={positive}/>
     </div>
   )
 }
